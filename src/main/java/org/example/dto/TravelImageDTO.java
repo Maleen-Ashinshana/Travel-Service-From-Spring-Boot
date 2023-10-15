@@ -17,6 +17,6 @@ public class TravelImageDTO {
     private String image2;
     @NotNull
     private String image3;
-
-    private TravelAreaEntity travelAreaEntity;
+    @NotNull
+    private String travel_area_id;
 }

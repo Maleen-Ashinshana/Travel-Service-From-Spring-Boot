@@ -12,7 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/area")
+@RequestMapping("/api/v1/area")
 public class TravelAreaController {
     private final TravelAreaService travelAreaService;
 
@@ -23,20 +23,24 @@ public class TravelAreaController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json",produces = "application/json")
     TravelAreaDTO saveArea(@Valid @RequestBody TravelAreaDTO  areaDTO, Errors errors){
-        return null;
+        return travelAreaService.saveArea(areaDTO);
     }
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{area_id}",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<TravelAreaDTO> getArea(@Valid @PathVariable String area_id){
-        return null;
+        TravelAreaDTO selectArea = travelAreaService.getSelectArea(area_id);
+
+        return new ResponseEntity<>(selectArea,HttpStatus.OK);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping()
-    void deleteArea(@Valid @PathVariable String area_id,@RequestBody TravelAreaDTO  areaDTO,Errors errors){
+    @DeleteMapping(value = "/{area_id}")
+    void deleteArea(@Valid @PathVariable String area_id){
+        travelAreaService.deleteArea(area_id);
 
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping()
+    @PatchMapping("/{area_id}")
     void updateArea(@Valid @PathVariable String area_id,@RequestBody TravelAreaDTO areaDTO){
-
+       areaDTO.setId((area_id));
+       travelAreaService.updateArea(areaDTO);
     }
 }

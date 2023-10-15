@@ -10,17 +10,19 @@ import org.example.entity.TravelAreaImage;
 
 import java.io.Serializable;
 import java.util.List;
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Data
 @ToString
 public class TravelAreaDTO implements Serializable {
     @NotNull
-    private int id;
+    private String id;
     @NotNull
     private String travel_area;
-    @NotNull
-    private List<TravelAreaImage> images;
-    @NotNull
-    private List<MainTravelServiceEntity> serviceEntities;
+
+
+    public TravelAreaDTO(String id, String travel_area) {
+        this.id = id;
+        this.travel_area = travel_area;
+    }
 }

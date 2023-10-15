@@ -18,12 +18,12 @@ import java.util.List;
 
 public class TravelAreaEntity implements SuperEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     @Column(nullable = false)
     private String travel_area;
     @OneToMany(mappedBy = "travelAreaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TravelAreaImage> billEntities;
+    private List<TravelAreaImage>  travelAreaImages;
 
     @OneToMany(mappedBy = "travelAreaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MainTravelServiceEntity> serviceEntities;
@@ -34,7 +34,7 @@ public class TravelAreaEntity implements SuperEntity{
     @OneToMany(mappedBy = "travelArea", cascade = CascadeType.ALL)
     private List<MainTravelServiceEntity> serviceEntities;*/
 
-    public TravelAreaEntity(int id, String travel_area) {
+    public TravelAreaEntity(String id, String travel_area) {
         this.id = id;
         this.travel_area = travel_area;
     }

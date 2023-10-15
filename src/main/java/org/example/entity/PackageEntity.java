@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
 @ToString
 public class PackageEntity implements SuperEntity {
     @Id

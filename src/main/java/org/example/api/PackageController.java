@@ -12,7 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/package")
+@RequestMapping("/api/v1/package")
 public class PackageController {
     private final PackageService packageService;
 
@@ -23,20 +23,24 @@ public class PackageController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json",produces = "application/json")
     PackageDTO savePackage(@Valid @RequestBody PackageDTO packageDTO, Errors errors){
-        return null;
+        return packageService.savePackage(packageDTO);
     }
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{package_id}",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<PackageDTO> getArea(@Valid @PathVariable String package_id){
-        return null;
+        PackageDTO selectPackage = packageService.getSelectPackage(package_id);
+
+        return new ResponseEntity<>(selectPackage,HttpStatus.OK);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping()
-    void deletePackage(@Valid @PathVariable String package_id,@RequestBody PackageDTO packageDTO,Errors errors){
+    @DeleteMapping(value = "/{package_id}")
+    void deletePackage(@Valid @PathVariable String package_id){
+        packageService.deletePackage(package_id);
 
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping()
+    @PatchMapping(value = "/{package_id}")
     void updatePackage(@Valid @PathVariable String package_id,@RequestBody PackageDTO packageDTO,Errors errors){
-
+    packageDTO.setPackage_id(package_id);
+    packageService.updatePackage(packageDTO);
     }
 }

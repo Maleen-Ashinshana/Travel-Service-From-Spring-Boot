@@ -36,7 +36,7 @@ public class TravelAreaController {
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping()
-    void updateArea(@Valid @PathVariable String area_id,@RequestBody TravelAreaDTO areaDTO,Errors errors){
+    void updateArea(@Valid @PathVariable String area_id,@RequestBody TravelAreaDTO areaDTO){
 
     }
 }

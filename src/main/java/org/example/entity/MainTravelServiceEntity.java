@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "service")
+
 public class MainTravelServiceEntity implements SuperEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,15 +39,19 @@ public class MainTravelServiceEntity implements SuperEntity {
     @Column(nullable = false)
     private int package_total;
 
+    @Column(nullable = false)
 
     private String vehicle_id;
 
+    @Column(nullable = false)
 
     private String guide_id;
 
+    @Column(nullable = false)
 
     private String user_id;
 
+    @Column(nullable = false)
 
     private String hotel_id;
 

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/travelImage")
-public class TravelImageController {
+public class TravelAreaImageController {
     private final TravelImageService imageService;
 
-    public TravelImageController(TravelImageService imageService) {
+    public TravelAreaImageController(TravelImageService imageService) {
         this.imageService = imageService;
     }
     @ResponseStatus(HttpStatus.CREATED)

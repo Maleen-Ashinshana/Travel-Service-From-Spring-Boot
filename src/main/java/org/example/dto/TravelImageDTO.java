@@ -10,7 +10,7 @@ import org.example.entity.TravelAreaEntity;
 @ToString
 public class TravelImageDTO {
     @NotNull
-    private int image_id;
+    private String image_id;
     @NotNull
     private String image1;
     @NotNull

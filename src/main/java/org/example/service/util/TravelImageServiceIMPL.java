@@ -1,7 +1,10 @@
 package org.example.service.util;
 
+import lombok.RequiredArgsConstructor;
 import org.example.dto.TravelImageDTO;
+import org.example.entity.TravelAreaEntity;
 import org.example.entity.TravelAreaImage;
+import org.example.repo.TravelAreaRepo;
 import org.example.repo.TravelImageRepo;
 import org.example.service.TravelImageService;
 import org.example.util.Converter;
@@ -19,29 +22,45 @@ import java.util.Optional;
 import java.util.function.Function;
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class TravelImageServiceIMPL implements TravelImageService {
-@Autowired
-private Converter converter;
-@Autowired
-private TravelImageRepo travelImageRepo;
+
+private final Converter converter;
+
+private final TravelImageRepo travelImageRepo;
+private final TravelAreaRepo travelAreaRepo;
 
     @Override
-    public TravelImageDTO saveImage(TravelImageDTO imageDTO) {
-        return null;
+    public TravelImageDTO saveImage(String area_id,TravelImageDTO imageDTO) {
+        TravelAreaEntity travelAreaEntity = travelAreaRepo.findById(area_id).orElseThrow();
+        TravelAreaImage imageEntity = converter.toImageEntity(imageDTO);
+        imageEntity.setTravelAreaEntity(travelAreaEntity);
+        TravelImageDTO travelImageDTO = converter.toImageDto(travelImageRepo.save(imageEntity));
+        System.out.println(travelImageDTO);
+        return travelImageDTO;
     }
 
     @Override
     public TravelImageDTO getSelectImage(String image_id) {
-        return null;
+        TravelAreaImage travelAreaImage = travelImageRepo.findById(image_id).orElseThrow();
+        TravelImageDTO travelImageDTO= converter.toImageDto(travelAreaImage);
+        travelImageDTO.setTravel_area_id(travelAreaImage.getTravelAreaEntity().getId());
+        return travelImageDTO;
+
     }
 
     @Override
-    public void updateImage(String image_id) {
-
+    public void updateImage(TravelImageDTO imageDTO) {
+        Optional<TravelAreaImage> byId = travelImageRepo.findById(String.valueOf(imageDTO.getImage_id()));
+        if (!byId.isPresent()){
+            byId.get().setImage1(imageDTO.getImage1());
+            byId.get().setImage2(imageDTO.getImage2());
+            byId.get().setImage3(imageDTO.getImage3());
+        }
     }
 
     @Override
     public void deleteImage(String image_id) {
-
+      travelImageRepo.deleteById(image_id);
     }
 }

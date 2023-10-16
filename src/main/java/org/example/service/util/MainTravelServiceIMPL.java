@@ -1,7 +1,13 @@
 package org.example.service.util;
 
+import lombok.RequiredArgsConstructor;
 import org.example.dto.MainTravelServiceDTO;
+import org.example.entity.MainTravelServiceEntity;
+import org.example.entity.PackageEntity;
+import org.example.entity.TravelAreaEntity;
 import org.example.repo.MainTravelServiceRepo;
+import org.example.repo.PackageRepo;
+import org.example.repo.TravelAreaRepo;
 import org.example.service.MainTravelService;
 import org.example.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +16,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class MainTravelServiceIMPL implements MainTravelService {
-    @Autowired
-    private Converter converter;
-    @Autowired
-    private MainTravelServiceRepo mainTravelServiceRepo;
+
+    private final Converter converter;
+
+    private final MainTravelServiceRepo mainTravelServiceRepo;
+    private final PackageRepo packageRepo;
+
     @Override
-    public MainTravelServiceDTO saveService(MainTravelServiceDTO serviceDTO) {
-        return null;
+    public MainTravelServiceDTO saveService(String user_id, String vehicle_id,String package_id,String hotel_id,String travel_area_id,MainTravelServiceDTO serviceDTO) {
+
+return null;
     }
 
     @Override

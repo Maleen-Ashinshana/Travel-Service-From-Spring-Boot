@@ -22,25 +22,25 @@ public class PackageController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json",produces = "application/json")
-    PackageDTO savePackage(@Valid @RequestBody PackageDTO packageDTO, Errors errors){
+    PackageDTO savePackage(@Valid @RequestBody PackageDTO packageDTO){
         return packageService.savePackage(packageDTO);
     }
     @GetMapping(value = "/{package_id}",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<PackageDTO> getArea(@Valid @PathVariable String package_id){
         PackageDTO selectPackage = packageService.getSelectPackage(package_id);
-
         return new ResponseEntity<>(selectPackage,HttpStatus.OK);
     }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+
     @DeleteMapping(value = "/{package_id}")
     void deletePackage(@Valid @PathVariable String package_id){
         packageService.deletePackage(package_id);
 
     }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+
     @PatchMapping(value = "/{package_id}")
-    void updatePackage(@Valid @PathVariable String package_id,@RequestBody PackageDTO packageDTO,Errors errors){
-    packageDTO.setPackage_id(package_id);
-    packageService.updatePackage(packageDTO);
+    void updatePackage(@Valid @PathVariable String package_id,@RequestBody PackageDTO packageDTO){
+        packageService.updatePackage(package_id,packageDTO);
+//    packageDTO.setPackage_id(package_id);
+//    packageService.updatePackage(packageDTO);
     }
 }

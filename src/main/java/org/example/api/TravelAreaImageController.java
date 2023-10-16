@@ -43,15 +43,30 @@ public class TravelAreaImageController {
         TravelImageDTO travelImageDTO=imageService.getSelectImage(image_id);
         return new ResponseEntity<>(travelImageDTO,HttpStatus.OK);
     }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+
     @DeleteMapping(value = "/{image_id}")
     void deleteImage(@Valid @PathVariable String image_id){
         imageService.deleteImage(image_id);
     }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+
     @PatchMapping(value = "/{image_id}")
-    void updateImage(@Valid @PathVariable String image_id,@RequestBody TravelImageDTO imageDTO,Errors errors){
-   imageDTO.setImage_id(image_id);
-   imageService.updateImage(imageDTO);
+    public String updateImage(
+            @Valid @PathVariable String image_id,
+            @RequestPart byte[] image1,
+            @RequestPart byte[] image2,
+            @RequestPart byte[] image3
+            ){
+        String a_image= Base64.getEncoder().encodeToString(image1);
+        String b_image= Base64.getEncoder().encodeToString(image2);
+        String c_image= Base64.getEncoder().encodeToString(image3);
+
+        TravelImageDTO travelImageDTO=new TravelImageDTO();
+        travelImageDTO.setImage1(a_image);
+        travelImageDTO.setImage2(b_image);
+        travelImageDTO.setImage3(c_image);
+
+        imageService.updateImage(image_id,travelImageDTO);
+        return String.valueOf(new ResponseEntity<>(HttpStatus.OK));
+
     }
 }

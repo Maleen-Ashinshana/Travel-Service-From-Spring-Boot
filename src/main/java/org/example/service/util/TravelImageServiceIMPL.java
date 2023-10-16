@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dto.TravelImageDTO;
 import org.example.entity.TravelAreaEntity;
 import org.example.entity.TravelAreaImage;
+import org.example.exception.NotFoundException;
 import org.example.repo.TravelAreaRepo;
 import org.example.repo.TravelImageRepo;
 import org.example.service.TravelImageService;
@@ -42,7 +43,7 @@ private final TravelAreaRepo travelAreaRepo;
 
     @Override
     public TravelImageDTO getSelectImage(String image_id) {
-        TravelAreaImage travelAreaImage = travelImageRepo.findById(image_id).orElseThrow();
+        TravelAreaImage travelAreaImage = travelImageRepo.findById(image_id).orElseThrow(()->new NotFoundException("The Image Id Not Fount :"+image_id));
         TravelImageDTO travelImageDTO= converter.toImageDto(travelAreaImage);
         travelImageDTO.setTravel_area_id(travelAreaImage.getTravelAreaEntity().getId());
         return travelImageDTO;
@@ -50,17 +51,27 @@ private final TravelAreaRepo travelAreaRepo;
     }
 
     @Override
-    public void updateImage(TravelImageDTO imageDTO) {
-        Optional<TravelAreaImage> byId = travelImageRepo.findById(String.valueOf(imageDTO.getImage_id()));
+    public void updateImage(String image_id,TravelImageDTO imageDTO) {
+        Optional<TravelAreaImage> byId = travelImageRepo.findById(image_id);
         if (!byId.isPresent()){
-            byId.get().setImage1(imageDTO.getImage1());
-            byId.get().setImage2(imageDTO.getImage2());
-            byId.get().setImage3(imageDTO.getImage3());
+            throw new NotFoundException("The Image Id Not Found :"+image_id);
+//            byId.get().setImage1(imageDTO.getImage1());
+//            byId.get().setImage2(imageDTO.getImage2());
+//            byId.get().setImage3(imageDTO.getImage3());
         }
+        TravelAreaImage travelAreaImage=byId.get();
+        travelAreaImage.setImage1(imageDTO.getImage1());
+        travelAreaImage.setImage2(imageDTO.getImage2());
+        travelAreaImage.setImage3(imageDTO.getImage3());
+         travelImageRepo.save(travelAreaImage);
     }
 
     @Override
     public void deleteImage(String image_id) {
-      travelImageRepo.deleteById(image_id);
+        Optional<TravelAreaImage> byId = travelImageRepo.findById(image_id);
+        if (!byId.isPresent()){
+            throw new NotFoundException("The Image Id Not Found :"+image_id);
+        }
+        travelImageRepo.deleteById(image_id);
     }
 }

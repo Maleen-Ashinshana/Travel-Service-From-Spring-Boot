@@ -28,19 +28,17 @@ public class TravelAreaController {
     @GetMapping(value = "/{area_id}",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<TravelAreaDTO> getArea(@Valid @PathVariable String area_id){
         TravelAreaDTO selectArea = travelAreaService.getSelectArea(area_id);
-
         return new ResponseEntity<>(selectArea,HttpStatus.OK);
     }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+
     @DeleteMapping(value = "/{area_id}")
     void deleteArea(@Valid @PathVariable String area_id){
         travelAreaService.deleteArea(area_id);
 
     }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+
     @PatchMapping("/{area_id}")
     void updateArea(@Valid @PathVariable String area_id,@RequestBody TravelAreaDTO areaDTO){
-       areaDTO.setId((area_id));
-       travelAreaService.updateArea(areaDTO);
+    travelAreaService.updateArea(area_id,areaDTO);
     }
 }

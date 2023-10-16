@@ -57,8 +57,11 @@ public class MainTravelServiceEntity implements SuperEntity {
 
 
     @ManyToOne
+    @JoinColumn(name = "travel_area_id",referencedColumnName = "id")
     private TravelAreaEntity travelAreaEntity;
+
     @ManyToOne
+    @JoinColumn(name = "package_id",referencedColumnName = "package_id")
     private PackageEntity packageEntity;
     public MainTravelServiceEntity(int service_id, String travel_area, String start_date, String end_date, int no_of_adult, int no_of_child, String need_a_guide_or_no, int total_hed_count, String user_package_start_time, String with_package_or_no, String with_guide_or_no, int package_total) {
         this.service_id = service_id;

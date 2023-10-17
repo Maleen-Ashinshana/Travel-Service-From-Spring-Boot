@@ -2,8 +2,6 @@ package org.example.api;
 
 import jakarta.validation.Valid;
 import org.example.dto.MainTravelServiceDTO;
-import org.example.dto.TravelAreaDTO;
-import org.example.repo.MainTravelServiceRepo;
 import org.example.service.MainTravelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,7 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/service")
+@RequestMapping("/api/v1/service")
 public class MainTravelController {
     private  final MainTravelService travelService;
 
@@ -20,22 +18,25 @@ public class MainTravelController {
         this.travelService = travelService;
     }
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(consumes = "application/json",produces = "application/json")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     MainTravelServiceDTO saveTravel(@Valid @RequestBody MainTravelServiceDTO serviceDTO, Errors errors){
-        return null;
+        System.out.println(serviceDTO);
+        return travelService.saveService(serviceDTO);
     }
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{travel_id}")
     ResponseEntity<MainTravelServiceDTO> getTravel(@Valid @PathVariable String travel_id){
-        return null;
-    }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping()
-    void deleteTravel(@Valid @PathVariable String travel_id,@RequestBody MainTravelServiceDTO serviceDTO,Errors errors){
+        MainTravelServiceDTO serviceDTO=travelService.getSelectService(travel_id);
 
+        return new ResponseEntity<>(serviceDTO,HttpStatus.OK);
     }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping()
-    void updateTravel(@Valid @PathVariable String travel_id,@RequestBody MainTravelServiceDTO serviceDTO,Errors errors){
+
+    @DeleteMapping(value = "/{travel_id}")
+    void deleteTravel(@Valid @PathVariable String travel_id){
+    travelService.deleteService(travel_id);
+    }
+    @PatchMapping(value = "/{travel_id}")
+    void updateTravel(@Valid @PathVariable String travel_id,@RequestBody MainTravelServiceDTO serviceDTO){
+        travelService.updateService(travel_id,serviceDTO);
 
     }
 }

@@ -25,20 +25,20 @@ public class MainTravelServiceEntity implements SuperEntity {
     @NotNull
     private LocalDate end_date;
 
-    private int no_of_adult;
+    private String no_of_adult;
 
-    private int no_of_child;
+    private String no_of_child;
     @NotNull
     private boolean need_a_guide_or_no;
 
-    private int total_hed_count;
+    private String total_hed_count;
     @NotNull
     private LocalDate user_package_start_date;
 
     @NotNull
     private boolean isWithGuide;
 
-    private int package_total;
+    private double package_total;
 
 
      @NotNull

@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/service")
 public class MainTravelController {
@@ -38,5 +40,10 @@ public class MainTravelController {
     void updateTravel(@Valid @PathVariable String travel_id,@RequestBody MainTravelServiceDTO serviceDTO){
         travelService.updateService(travel_id,serviceDTO);
 
+    }
+    @GetMapping
+    public ResponseEntity<List<MainTravelServiceDTO>> getAllGuide() {
+        List<MainTravelServiceDTO> dto = travelService.getAllMainTravel();
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 }

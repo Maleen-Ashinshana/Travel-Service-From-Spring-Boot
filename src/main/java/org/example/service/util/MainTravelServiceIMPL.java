@@ -11,7 +11,9 @@ import org.example.util.Converter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -49,7 +51,7 @@ public class MainTravelServiceIMPL implements MainTravelService {
         travelService.setNo_of_adult(serviceDTO.getNo_of_adult());
         travelService.setNo_of_child(serviceDTO.getNo_of_child());
         travelService.setWithGuide(serviceDTO.isWith_guide_or_no());
-        travelService.setTotal_hed_count(serviceDTO.getTotal_hed_count());
+        travelService.setTotal_hed_count((serviceDTO.getTotal_hed_count()));
         travelService.setUser_package_start_date(serviceDTO.getUser_package_start_date());
         travelService.setPackage_total(serviceDTO.getPackage_total());
         travelService.setUser_id(serviceDTO.getUser_id());
@@ -68,5 +70,10 @@ public class MainTravelServiceIMPL implements MainTravelService {
             throw  new NotFoundException("Service ID Not Found :"+service_id);
         }
         mainTravelServiceRepo.deleteById(service_id);
+    }
+
+    @Override
+    public List<MainTravelServiceDTO> getAllMainTravel() {
+        return mainTravelServiceRepo.findAll().stream().map(service->converter.toServiceDto(service)).collect(Collectors.toList());
     }
 }

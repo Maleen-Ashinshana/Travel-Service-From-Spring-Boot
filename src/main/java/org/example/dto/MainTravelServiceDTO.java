@@ -18,13 +18,13 @@ public class MainTravelServiceDTO {
     private String service_id;
     private LocalDate start_date;
     private LocalDate end_date;
-    private int no_of_adult;
-    private int no_of_child;
+    private String no_of_adult;
+    private String no_of_child;
     private boolean need_a_guide_or_no;
-    private int total_hed_count;
+    private String total_hed_count;
     private LocalDate user_package_start_date;
     private boolean with_guide_or_no;
-    private int package_total;
+    private double package_total;
 
 
    private String user_id;
@@ -39,7 +39,7 @@ public class MainTravelServiceDTO {
 
 
 
-    public MainTravelServiceDTO(String service_id, LocalDate start_date, LocalDate end_date, int no_of_adult, int no_of_child, boolean need_a_guide_or_no, int total_hed_count, LocalDate user_package_start_time, boolean with_guide_or_no, int package_total) {
+    public MainTravelServiceDTO(String service_id, LocalDate start_date, LocalDate end_date, String no_of_adult, String no_of_child, boolean need_a_guide_or_no, String total_hed_count, LocalDate user_package_start_time, boolean with_guide_or_no, double package_total) {
         this.service_id = service_id;
         this.start_date = start_date;
         this.end_date = end_date;

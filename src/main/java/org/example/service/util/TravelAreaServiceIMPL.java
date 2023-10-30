@@ -28,7 +28,7 @@ public class TravelAreaServiceIMPL  implements TravelAreaService {
     @Override
     public TravelAreaDTO getSelectedTravel(String area_id) {
         Optional<TravelArea> byId = areaRepo.findById(area_id);
-        if (byId.isEmpty()){
+        if (!byId.isPresent()){
             throw new NotFoundException("Area Id Is Not Found :" + area_id);
 
         }
@@ -38,7 +38,7 @@ public class TravelAreaServiceIMPL  implements TravelAreaService {
     @Override
     public void updateTravel(String area_id, TravelAreaDTO areaDTO) {
         Optional<TravelArea> byId = areaRepo.findById(area_id);
-        if (byId.isEmpty()){
+        if (!byId.isPresent()){
             throw new NotFoundException("Area Id Is Not Found :" + area_id);
         }
         TravelArea travelArea=byId.get();

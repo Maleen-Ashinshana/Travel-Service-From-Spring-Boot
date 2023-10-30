@@ -45,11 +45,11 @@ public class TravelImagesController {
         TravelAreaImageDTO imageDTO=service.getSelectedImage(image_id);
         return new ResponseEntity<>(imageDTO,HttpStatus.OK);
     }
-    @DeleteMapping("/{image_id}")
+    @DeleteMapping(value = "/{image_id}")
     void deleteAreaImage(@Valid @PathVariable String image_id){
         service.deleteImage(image_id);
     }
-    @PatchMapping("/{image_id}")
+    @PatchMapping(value = "/{image_id}")
     public String updateHotelImage(
             @RequestPart List<MultipartFile> area_image,
 

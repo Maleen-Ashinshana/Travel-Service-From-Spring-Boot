@@ -43,7 +43,7 @@ public class TravelAreaServiceIMPL  implements TravelAreaService {
         }
         TravelArea travelArea=byId.get();
         travelArea.setArea_location(areaDTO.getArea_location());
-        travelArea.setAreaImages(areaDTO.getAreaImages());
+        /*travelArea.setAreaImages(areaDTO.getAreaImages());*/
 
         areaRepo.save(travelArea);
 

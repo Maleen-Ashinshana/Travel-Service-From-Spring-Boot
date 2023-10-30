@@ -28,8 +28,9 @@ public class Converter {
         return modelMapper.map(mainTravelServiceEntity, MainTravelServiceDTO.class);
     }
     public TravelAreaDTO toAreaDto(TravelArea travelArea){
-        /*List<Travel_area_image> areaImages = travelArea.getAreaImages();
+        List<Travel_area_image> areaImages = travelArea.getAreaImages();
         TravelAreaDTO map = modelMapper.map(travelArea, TravelAreaDTO.class);
+
         if (areaImages!=null){
             map.setAreaImages(
                     areaImages.stream().map(t->new TravelAreaImageDTO(t.getImage_id(),
@@ -38,8 +39,8 @@ public class Converter {
 
 
         }
-        return map;*/
-        return modelMapper.map(travelArea, TravelAreaDTO.class);
+        return map;
+      /*  return modelMapper.map(travelArea, TravelAreaDTO.class);*/
     }
     public TravelArea toAreaEntity(TravelAreaDTO areaDTO){
         return modelMapper.map(areaDTO, TravelArea.class);

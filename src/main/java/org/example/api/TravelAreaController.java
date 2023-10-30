@@ -23,17 +23,17 @@ public class TravelAreaController {
     TravelAreaDTO saveArea(@Valid @RequestBody TravelAreaDTO areaDTO){
         return travelAreaService.saveArea(areaDTO);
     }
-    @GetMapping(value = "/area_id")
+    @GetMapping(value = "/{area_id}")
     ResponseEntity<TravelAreaDTO> getSelectedTravel(@Valid @PathVariable String area_id){
         TravelAreaDTO selectedTravel = travelAreaService.getSelectedTravel(area_id);
         return new ResponseEntity<>(selectedTravel,HttpStatus.OK);
     }
-    @DeleteMapping(value = "/area_id")
+    @DeleteMapping(value = "/{area_id}")
     void deleteArea(@Valid @PathVariable String area_id){
         travelAreaService.deleteTravel(area_id);
 
     }
-    @PatchMapping("/area_id")
+    @PatchMapping(value = "/{area_id}")
     void updateArea(@Valid @PathVariable String area_id,@RequestBody TravelAreaDTO areaDTO){
         travelAreaService.updateTravel(area_id,areaDTO);
 

@@ -33,12 +33,20 @@ public class TravelAreaImageServiceIMPL implements TravelAreaImageService {
         TravelAreaImageDTO imageDto = converter.toImageDto(imageRepo.save(areaImageEntity));
 
 
-        return imageDTO;
+        return imageDto;
     }
 
     @Override
     public TravelAreaImageDTO getSelectedImage(String image_id) {
-        Travel_area_image travelAreaImage = imageRepo.findById(image_id).orElseThrow(() -> new NotFoundException("Area Image Id Bot Found :" + image_id));
+        Travel_area_image travelAreaImage = imageRepo.findById(image_id).orElseThrow(() -> new NotFoundException("Area ID Is Not Found :" + image_id));
+        TravelAreaImageDTO imageDto = converter.toImageDto(travelAreaImage);
+        imageDto.setTravelArea(travelAreaImage.getTravelArea().getArea_id());
+        imageDto.setArea_image(travelAreaImage.getArea_image().getBytes());
+
+        System.out.println(imageDto.getArea_image() + "Awa ");
+
+        return imageDto;
+        /*Travel_area_image travelAreaImage = imageRepo.findById(image_id).orElseThrow(() -> new NotFoundException("Area Image Id Bot Found :" + image_id));
 
         TravelAreaImageDTO imageDto = converter.toImageDto(travelAreaImage);
         imageDto.setTravelArea(travelAreaImage.getTravelArea().getArea_id());
@@ -49,7 +57,7 @@ public class TravelAreaImageServiceIMPL implements TravelAreaImageService {
 
 
 
-        return imageDto;
+        return imageDto;*/
     }
 
     @Override

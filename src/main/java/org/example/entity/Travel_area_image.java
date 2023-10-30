@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Travel_area_image {
+public class Travel_area_image implements SuperEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String image_id;

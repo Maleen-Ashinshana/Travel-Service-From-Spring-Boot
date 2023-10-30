@@ -15,7 +15,7 @@ public class TravelAreaDTO {
 
     private String area_location;
 
-    private List<Travel_area_image> areaImages=new ArrayList<>();
+    private List<TravelAreaImageDTO> areaImages=new ArrayList<>();
 
     public TravelAreaDTO(String area_id, String area_location) {
         this.area_id = area_id;

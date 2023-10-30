@@ -33,7 +33,7 @@ public class MainTravelServiceIMPL implements MainTravelService {
     @Override
     public MainTravelServiceDTO getSelectService(String service_id) {
         Optional<MainTravelServiceEntity> byId = mainTravelServiceRepo.findById(service_id);
-        if (!byId.isPresent()){
+        if (byId.isEmpty()){
             throw  new NotFoundException("Service ID Not Found :"+service_id);
         }
         return converter.toServiceDto(byId.get());
@@ -42,7 +42,7 @@ public class MainTravelServiceIMPL implements MainTravelService {
     @Override
     public void updateService(String service_id,MainTravelServiceDTO serviceDTO) {
         Optional<MainTravelServiceEntity> byId = mainTravelServiceRepo.findById(service_id);
-        if (!byId.isPresent()){
+        if (byId.isEmpty()){
             throw  new NotFoundException("Service ID Not Found :"+service_id);
         }
         MainTravelServiceEntity  travelService=byId.get();
@@ -66,7 +66,7 @@ public class MainTravelServiceIMPL implements MainTravelService {
     @Override
     public void deleteService(String service_id) {
         Optional<MainTravelServiceEntity> byId = mainTravelServiceRepo.findById(service_id);
-        if (!byId.isPresent()){
+        if (byId.isEmpty()){
             throw  new NotFoundException("Service ID Not Found :"+service_id);
         }
         mainTravelServiceRepo.deleteById(service_id);

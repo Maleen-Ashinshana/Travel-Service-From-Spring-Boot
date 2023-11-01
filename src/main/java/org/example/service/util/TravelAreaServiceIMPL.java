@@ -52,9 +52,10 @@ public class TravelAreaServiceIMPL  implements TravelAreaService {
     @Override
     public void deleteTravel(String area_id) {
         Optional<TravelArea> byId = areaRepo.findById(area_id);
-        if (byId.isEmpty()){
-            throw new NotFoundException("Area Id Is Not Found :" + area_id);
+        if (byId.isEmpty()) {
+            throw new NotFoundException("Area Id Is Not Found: " + area_id);
         }
+
         areaRepo.deleteById(area_id);
 
     }

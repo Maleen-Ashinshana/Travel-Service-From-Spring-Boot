@@ -40,26 +40,17 @@ public class MainTravelServiceEntity implements SuperEntity {
 
     private double package_total;
 
-
      @NotNull
     private String vehicle_id;
 
-
-
     private String guide_id;
 
+    private String user;
 
-     @NotNull
-    private String user_id;
-
-
-     @NotNull
     private String hotel_id;
-
 
     private List<String> area_list;
 
     private TravelPackage travelPackage;
-
 
 }

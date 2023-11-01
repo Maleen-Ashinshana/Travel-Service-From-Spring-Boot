@@ -1,7 +1,7 @@
 package org.example.service;
 
-import org.apache.catalina.authenticator.SavedRequest;
 import org.example.dto.MainTravelServiceDTO;
+import org.example.dto.UserDetails;
 
 import java.util.List;
 
@@ -12,4 +12,5 @@ public interface MainTravelService {
     void deleteService(String service_id);
     List<MainTravelServiceDTO> getAllMainTravel();
     /*List<Tra>*/
+    UserDetails getFulProfile(UserDetails userDetails);
 }

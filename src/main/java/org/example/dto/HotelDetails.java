@@ -12,16 +12,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @Builder
-public class HotelDTO implements Serializable {
+public class HotelDetails implements Serializable {
     private String hotel_id;
-    @NotBlank
     private  String hotel_name;
-    @NotBlank
     private  String hotel_category;
-    @NotBlank
     private  String location;
-    @NotBlank
     private  String email;
-    @NotBlank
-    private  int contact_number;
+    private  String contact_number1;
+    private  String contact_number2;
+    private  double hotelFee;
+    private  String remark;
 }

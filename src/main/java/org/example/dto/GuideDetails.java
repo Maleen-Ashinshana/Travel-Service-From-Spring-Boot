@@ -12,16 +12,19 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @Builder
-public class GuideDTO implements Serializable {
+public class GuideDetails implements Serializable {
     private String guide_id;
-    @NotBlank
     private String guide_name;
-    @NotBlank
     private String address;
-    @NotBlank
-    private int age;
-    @NotBlank
-    private int contact_number;
-    @NotBlank
+    private String age;
+    private String contact_number;
     private String gender;
+    private String experience;
+    private double man_day_value;
+    private String  remark;
+    private String profile_picture;
+    private String guide_nic_image;
+    private String guide_id_image;
+
+    private String travelId;
 }

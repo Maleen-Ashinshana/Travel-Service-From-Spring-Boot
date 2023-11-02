@@ -16,6 +16,7 @@ public interface MainTravelServiceRepo extends CrudRepository<MainTravelServiceE
 //    MainTravelServiceEntity getMainTravelServiceEntitiesByiAndService_id(String service_id);
 //    void deleteMainTravelServiceEntitiesByService_id(String service_id);
     List<MainTravelServiceEntity> findAll();
+   /* MainTravelServiceEntity findByUse_Id(String userName);*/
     /*MainTravelServiceEntity  findByUser_id(String userId);*/
      /*MainTravelServiceEntity findByUserId(String userId);*/
     /*MainTravelServiceEntity findByUser_id(String userId);*/

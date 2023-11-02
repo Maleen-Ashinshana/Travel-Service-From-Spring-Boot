@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -22,8 +23,13 @@ public class MainTravelController {
     private final WebClient.Builder  webClientBuilder;
     private final ExchangeStrategies exchangeStrategies;
     private  final MainTravelService travelService;
+
+    /*public MainTravelController(MainTravelService travelService) {
+        this.travelService = travelService;
+    }*/
+
     /*@Value("http://localhost:9095/User/api/v1/user/")
-    private String customerDAtaEndPoint;*/
+        private String customerDAtaEndPoint;*/
     public MainTravelController(WebClient.Builder webClientBuilder,MainTravelService travelService) {
         this.webClientBuilder = webClientBuilder;
         this.exchangeStrategies = ExchangeStrategies.builder()
@@ -58,7 +64,7 @@ public class MainTravelController {
         List<MainTravelServiceDTO> dto = travelService.getAllMainTravel();
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
-    private <T> Mono<T> makeWebClientRequest(String baseUrl, String path, Class<T> responseClass, String id) {
+    /*private <T> Mono<T> makeWebClientRequest(String baseUrl, String path, Class<T> responseClass, String id) {
         WebClient webClient = webClientBuilder.baseUrl(baseUrl + path + id)
                 .exchangeStrategies(exchangeStrategies)
                 .build();
@@ -96,18 +102,18 @@ public class MainTravelController {
     @GetMapping("/hotelImage")
     public HotelImageDetails getHotelImage(@RequestParam String hotelImageId) {
         return makeWebClientRequest("http://localhost:8086/hotel/api/v1/hotelImage/", "", HotelImageDetails.class, hotelImageId).block();
-    }
+    }*/
 
 
-/*    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+   /* @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     UserDetails getFulProfile(@RequestParam String userId){
         WebClient webClient=WebClient.create(customerDAtaEndPoint+userId);
         System.out.println(userId+ "msdlakcjjvcp");
         return (UserDetails) webClient;
-       *//* Mono<UserDetails> userDTOMono=webClient.get().retrieve().bodyToMono(UserDetails.class);
-        return travelService.getFulProfile(userDTOMono.block());*//*
+        Mono<UserDetails> userDTOMono=webClient.get().retrieve().bodyToMono(UserDetails.class);
+        return travelService.getFulProfile(userDTOMono.block());
     }*/
-    /*@RequestMapping("/get")
+    @RequestMapping("/user")
    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public UserDetails getFullProfile(@RequestParam String userId) {
         WebClient webClient = WebClient.create("http://localhost:9095/User/api/v1/user/" + userId);
@@ -116,14 +122,14 @@ public class MainTravelController {
         Mono<UserDetails> userDetailsMono = webClient.get().retrieve().bodyToMono(UserDetails.class);
         UserDetails user = userDetailsMono.block();
         return  user;
-       *//* return webClient.get()
-                .retrieve()
-                .bodyToMono(UserDetails.class);*//*
-
     }
-    @RequestMapping("/guide")
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public GuideDetails getGuideProfile(@RequestParam String guideId) {
+  /*  @RequestMapping("/guide")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)*/
+    /*@GetMapping("/guides")
+    public Flux<GuideDetails> getAllGuides() {
+        return makeWebClientRequest("http://localhost:9092/Guide/api/v1/guide/", "", GuideDetails.class);
+    }*/
+    /*public GuideDetails getGuideProfile(@RequestParam String guideId) {
         ExchangeStrategies exchangeStrategies = ExchangeStrategies.builder()
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024)) // Set the max buffer size to 10MB
                 .build();
@@ -137,7 +143,33 @@ public class MainTravelController {
         GuideDetails guide = guideDetailsMono.block();
         return guide;
 
+    }*/
+    /*private <T> Flux<T> makeWebClientRequest(String baseUrl, String path, Class<T> responseClass) {
+        WebClient webClient = webClientBuilder.baseUrl(baseUrl + path)
+                .exchangeStrategies(exchangeStrategies)
+                .build();
+
+        return webClient.get()
+                .retrieve()
+                .bodyToFlux(responseClass);
+    }*/
+
+    /*All Guides*/
+  private <T> Flux<T> makeWebClientRequest(String baseUrl, String path, Class<T> responseClass) {
+      WebClient webClient = webClientBuilder.baseUrl(baseUrl + path)
+              .exchangeStrategies(exchangeStrategies)
+              .build();
+
+      return webClient.get()
+              .retrieve()
+              .bodyToFlux(responseClass);
+  }
+
+    @GetMapping("/guides")
+    public Flux<GuideDetails> getAllGuides() {
+        return makeWebClientRequest("http://localhost:9092/Guide/api/v1/guide", "", GuideDetails.class);
     }
+
     @RequestMapping("/vehicle")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public VehicleDetails getVehicle(@RequestParam String vehicleId) {
@@ -205,7 +237,7 @@ public class MainTravelController {
         HotelImageDetails imageDetails1 =imageDetails.block();
         return imageDetails1;
 
-    }*/
+    }
 
 
 

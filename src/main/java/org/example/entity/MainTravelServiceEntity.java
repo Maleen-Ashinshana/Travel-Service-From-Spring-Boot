@@ -29,14 +29,14 @@ public class MainTravelServiceEntity implements SuperEntity {
 
     private String no_of_child;
     @NotNull
-    private boolean need_a_guide_or_no;
+    private String need_a_guide_or_no;
 
     private String total_hed_count;
     @NotNull
     private LocalDate user_package_start_date;
 
-    @NotNull
-    private boolean isWithGuide;
+    /*@NotNull
+    private boolean isWithGuide;*/
 
     private double package_total;
 
@@ -49,8 +49,8 @@ public class MainTravelServiceEntity implements SuperEntity {
 
     private String hotel_id;
 
-    private List<String> area_list;
+    private String area;
 
-    private TravelPackage travelPackage;
+    private String travelPackage;
 
 }

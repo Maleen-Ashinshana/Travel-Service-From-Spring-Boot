@@ -72,14 +72,14 @@ public class MainTravelServiceIMPL implements MainTravelService {
         travelService.setEnd_date(serviceDTO.getEnd_date());
         travelService.setNo_of_adult(serviceDTO.getNo_of_adult());
         travelService.setNo_of_child(serviceDTO.getNo_of_child());
-        travelService.setWithGuide(serviceDTO.isWith_guide_or_no());
+        /*travelService.setWithGuide(serviceDTO.isWith_guide_or_no());*/
         travelService.setTotal_hed_count((serviceDTO.getTotal_hed_count()));
         travelService.setUser_package_start_date(serviceDTO.getUser_package_start_date());
         travelService.setPackage_total(serviceDTO.getPackage_total());
         travelService.setUser(serviceDTO.getUser_id());
         travelService.setVehicle_id(serviceDTO.getVehicle_id());
         travelService.setHotel_id(serviceDTO.getHotel_id());
-        travelService.setArea_list(serviceDTO.getArea_list());
+        travelService.setArea(serviceDTO.getArea());
         travelService.setTravelPackage(serviceDTO.getTravelPackage());
 
       mainTravelServiceRepo.save(travelService);
